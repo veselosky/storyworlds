@@ -1,0 +1,13 @@
+{
+  "editor.formatOnSave": true,
+  "python.autoComplete.addBrackets": true,
+  "python.formatting.blackArgs": ["--line-length", "119"],
+  "python.formatting.provider": "black",
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
+  "python.linting.lintOnTextChange": false,
+  "python.linting.pylintUseMinimalCheckers": false,
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+  "python.pythonPath": "/Users/vince/.virtualenvs/storyworlds/bin/python"
+}
