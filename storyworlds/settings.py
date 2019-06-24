@@ -31,7 +31,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-defaultdb = "sqlite:///%s/db.sqlite3" % BASE_DIR
+defaultdb = "spatialite:///%s/db.sqlite3" % BASE_DIR
 DATABASES = {"default": env.db(default=defaultdb)}
 
 # Static files (CSS, JavaScript, Images)
@@ -60,10 +60,10 @@ TAGGIT_CASE_INSENSITIVE = True
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    # {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    # {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    # {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 INSTALLED_APPS = [
@@ -73,6 +73,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
+    "adminsortable2",
     "taggit",
     "worlds",
 ]
@@ -86,6 +88,24 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+# In DEV environments, install dev apps and middlewares too.
+if DEBUG:
+    try:
+        import debug_toolbar
+
+        INSTALLED_APPS += ["debug_toolbar"]
+        MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
+    except ImportError:
+        # Not an error if we don't have it.
+        pass
+
+    try:
+        import django_extensions
+
+        INSTALLED_APPS += ["django_extensions"]
+    except ImportError:
+        # Not an error if we don't have it.
+        pass
 
 ROOT_URLCONF = "storyworlds.urls"
 

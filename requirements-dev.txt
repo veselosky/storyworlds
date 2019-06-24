@@ -1,6 +1,9 @@
 -r requirements.txt
 black
 django-debug-toolbar
+django_extensions
+ipython
+ptpython
 pylint
 pylint_django
 rope
